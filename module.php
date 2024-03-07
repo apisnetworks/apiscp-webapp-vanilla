@@ -61,17 +61,16 @@
 				return error('%(what)s must be enabled to install %(app)s',
 					['what' => 'MySQL', 'app' => static::APP_NAME]);
 			}
+
 			if (!version_compare($this->php_version(), '7', '>=')) {
 				return error('%s requires PHP7', Handler::NAME);
-			}
-
-			if (!($docroot = $approot = $this->getDocumentRoot($hostname, $path))) {
-				return error("failed to normalize path for `%s'", $hostname);
 			}
 
 			if (!$this->parseInstallOptions($opts, $hostname, $path)) {
 				return false;
 			}
+
+			$docroot = $approot = $this->getDocumentRoot($hostname, $path);
 
 			if (!$this->downloadVersion($approot, $opts['version'])) {
 				return error("Failed to download %(app)s", ['app' => Handler::NAME]);

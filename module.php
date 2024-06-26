@@ -136,7 +136,6 @@
 					]);
 				}
 
-				$this->fortify($hostname, $path, Handler::DEFAULT_FORTIFICATION);
 				$this->fixRewriteBase($docroot);
 				$fqdn = $this->web_normalize_hostname($hostname);
 				$opts['uri'] = rtrim($fqdn . '/' . $path, '/');
@@ -157,7 +156,6 @@
 				$this->file_chmod("{$approot}/version.json", 640);
 			}
 
-			$this->initializeMeta($docroot, $opts);
 			$this->notifyInstalled($hostname, $path, $opts);
 
 			return info('%(app)s installed - confirmation email with login info sent to %(email)s',

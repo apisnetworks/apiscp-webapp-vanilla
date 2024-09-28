@@ -127,7 +127,7 @@
 					do {
 						usleep(250000);
 						$i = ($i ?? 0) + 1;
-					} while (!$this->file_exists("${approot}/conf/config.php") && $i <= 40);
+					} while (!$this->file_exists("{$approot}/conf/config.php") && $i <= 40);
 				} catch (\GuzzleHttp\Exception\ClientException $e) {
 					$response = json_decode($e->getResponse()->getBody()->getContents(), true);
 					error("Self-request failed (status: %(status)d): %(err)s", [

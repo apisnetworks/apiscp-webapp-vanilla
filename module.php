@@ -354,6 +354,15 @@
 				return error("Version %(version)s too old to support automatic upgrades", ['version' => $oldVersion]);
 			}
 
+			$phpVersion = $this->php_pool_version_from_path($approot);
+			if (Versioning::compare($phpVersion, '8.0.2', '<') && Versioning::compare($version, '2024.012', '>=')) {
+				return error("%(name)s v%(version)s requires at least %(what)s v%(minver)s", [
+					'name' => self::APP_NAME,
+					'version' => $version,
+					'what' => 'PHP',
+					'minver' => '8.0.2'
+				]);
+			}
 
 			$this->reconfigure($hostname, $path, ['maintenance' => true]);
 			$cleanup = new Deferred;
